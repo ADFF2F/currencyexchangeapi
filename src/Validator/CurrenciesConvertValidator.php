@@ -9,18 +9,15 @@ use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-final class CurrencyValidator
+final class CurrenciesConvertValidator
 {
     private ValidatorInterface $validator;
     private CurrencyRepository $currencyRepository;
     private CurrencyAssert $currencyAssert;
+
     private array $errors = [];
 
-    public function __construct(
-        ValidatorInterface $validator,
-        CurrencyRepository $currencyRepository,
-        CurrencyAssert $currencyAssert
-    )
+    public function __construct(ValidatorInterface $validator, CurrencyRepository $currencyRepository, CurrencyAssert $currencyAssert)
     {
         $this->validator = $validator;
         $this->currencyRepository = $currencyRepository;
@@ -30,7 +27,22 @@ final class CurrencyValidator
     public function validate(array $optionalParameters)
     {
         $constraints = new Assert\Collection([
-            'currency' => [($this->currencyAssert)()],
+            'from' => [
+                ($this->currencyAssert)(),
+                new Assert\NotBlank(),
+            ],
+            'to' => [
+                ($this->currencyAssert)(),
+                new Assert\NotBlank()
+            ],
+            'amount' => [
+                new Assert\PositiveOrZero([]),
+                new Assert\NotBlank(),
+                new Assert\Regex([
+                    'pattern' => "@^\d+$@",
+                    'message' => 'Expected int value'
+                ]),
+            ],
         ]);
 
         $violations = $this->validator->validate($optionalParameters, $constraints);
