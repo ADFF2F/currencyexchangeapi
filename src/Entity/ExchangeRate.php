@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=ExchangeRateRepository::class)
  */
-class ExchangeRate
+class ExchangeRate implements \JsonSerializable
 {
     /**
      * @ORM\Id()
@@ -74,4 +74,11 @@ class ExchangeRate
 
         return $this;
     }
+
+    public function jsonSerialize()
+    {
+        return [$this->exchangeTo->getCode() => $this->rate];
+    }
+
+
 }
