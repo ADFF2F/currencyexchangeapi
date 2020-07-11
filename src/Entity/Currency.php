@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=CurrencyRepository::class)
  */
-class Currency
+class Currency implements \JsonSerializable
 {
     /**
      * @ORM\Id()
@@ -80,5 +80,10 @@ class Currency
         }
 
         return $this;
+    }
+
+    public function jsonSerialize()
+    {
+        return $this->code;
     }
 }
