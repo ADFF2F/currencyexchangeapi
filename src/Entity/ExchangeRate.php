@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=ExchangeRateRepository::class)
+ * @ORM\Table(uniqueConstraints={@ORM\UniqueConstraint(name="IDX_FROM_TO", columns={"exchange_from_id", "exchange_to_id"})})
  */
 class ExchangeRate implements \JsonSerializable
 {
