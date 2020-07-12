@@ -35,10 +35,10 @@ currency: 3 letter currency code ISO 4217 e.g. PLN, USD, EUR
 
 GET /currencies/convert
 Return converted value
-GET Parameteres:
-required from: 3 letter currency code ISO 4217
-required to: 3 letter currency code ISO 4217
-required amount: positive integer representing how much to exchange in the smallest currency unit (e.g. 100 cents to exchange $1.00) 
+GET Parameteres: 
+from: (required) 3 letter currency code ISO 4217
+to: (required) 3 letter currency code ISO 4217
+amount: (required) positive integer representing how much to exchange in the smallest currency unit (e.g. 100 cents to exchange $1.00) 
 ```
  
 ### Testing
