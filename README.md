@@ -19,6 +19,10 @@ Create database and execute migrations:
 php bin/console doctrine:database:create
 php bin/console doctrine:migrations:migrate
 ```
+Start symfony server in the background:
+```bash
+symfony server:start -d
+```
 Insert initial data:
 ```bash
 bin/console exchange-api:insert-initial-data 
